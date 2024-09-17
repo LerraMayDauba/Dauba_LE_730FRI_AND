@@ -1,45 +1,73 @@
 package com.dauba.todolist;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String> texts;
+    private ArrayList<Integer> images;  // You can add default image if needed
+    private CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize ListView and input fields
         ListView listView = findViewById(R.id.listview);
+        EditText inputText = findViewById(R.id.input_text);
+        Button addButton = findViewById(R.id.add_button);
 
-        // Sample data
-        int[] images = {
-                R.drawable.tomato,
-                R.drawable.saluyot,
-                R.drawable.malunggay,
-                R.drawable.eggplant,
-                R.drawable.mais,
-                R.drawable.okra,
-                R.drawable.tangkong,
-                R.drawable.tanglad,
-                // Add more images
-        };
+        // Sample data (can add a default image for new items if required)
+        images = new ArrayList<>();
+        texts = new ArrayList<>();
 
-        String[] texts = {
-                "kamatis",
-                "Saluyot",
-                "Malunggay",
-                "Talong",
-                "Mais",
-                "Okra",
-                "Tangkong",
-                "Tanglad",
-                // Add more text
-        };
+        images.add(R.drawable.tomato);
+        texts.add("Kamatis");
 
-        CustomAdapter adapter = new CustomAdapter(this, images, texts);
+        images.add(R.drawable.saluyot);
+        texts.add("Saluyot");
+
+        // Initialize adapter
+        adapter = new CustomAdapter(this, images, texts);
         listView.setAdapter(adapter);
+
+        // Set listener for add button
+        addButton.setOnClickListener(v -> {
+            String newItem = inputText.getText().toString().trim();
+            // Add a default image or allow user to choose
+            if (!newItem.isEmpty()) {
+                texts.add(newItem);
+                images.add(R.drawable.eggplant);
+                images.add(R.drawable.malunggay);
+                images.add(R.drawable.mais);
+                images.add(R.drawable.okra);
+                images.add(R.drawable.onion);
+                images.add(R.drawable.repolyo);
+                images.add(R.drawable.mais);
+                images.add(R.drawable.tangkong);
+                images.add(R.drawable.tanglad);
+                images.add(R.drawable.upo);
+                images.add(R.drawable.potato);
+                images.add(R.drawable.baguiobeans);
+                images.add(R.drawable.carrot);
+                images.add(R.drawable.ampalaya);
+                images.add(R.drawable.garlic);
+                images.add(R.drawable.ginger);
+                images.add(R.drawable.squash);
+
+                adapter.notifyDataSetChanged(); // Update ListView
+                inputText.setText(""); // Clear the input field
+                Toast.makeText(MainActivity.this, "Item added", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Please enter text", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
