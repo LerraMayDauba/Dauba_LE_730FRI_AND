@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/gotofragment"
+        android:title="Go to Fragment"/>
+    <item
+        android:id="@+id/openDialog"
+        android:title="Open Dialog"/>
+    <item
+        android:id="@+id/moreOptions"
+        android:title="More ..."
+        android:icon="@drawable/ic_more">
+        <menu>
+            <item
+                android:id="@+id/Help"
+                android:title="Help" />
+            <item
+                android:id="@+id/Exit"
+                android:title="Exit" />
+        </menu>
+    </item>
+</menu>
